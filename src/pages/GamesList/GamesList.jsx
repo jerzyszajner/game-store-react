@@ -1,7 +1,7 @@
 import styles from "./GamesList.module.css";
 
 const GamesList = () => {
-  return <div>GameList</div>;
+  return <div></div>;
 };
 
 export default GamesList;
