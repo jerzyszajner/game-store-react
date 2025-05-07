@@ -1,6 +1,9 @@
 import styles from "./SignUp.module.css";
 import Button from "../../components/Button/Button";
 import { useRef, useState } from "react";
+import { useSignUpValidation } from "../../hooks/useSignUpValidation";
+import { useAuth } from "../../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   // Declare state variables and refs
@@ -15,6 +18,12 @@ const SignUp = () => {
     previewUrl: "",
   });
   const fileInputRef = useRef(null);
+  // Validate function from the custom hook
+  const { errors, validate } = useSignUpValidation();
+  // Sign up function from the custom hook
+  const { signUp, signUpErrors, user } = useAuth();
+  // Redirect users
+  const navigate = useNavigate();
   // Retrive the input values
   const handleInputChange = (e) => {
     if (e.target.name === "file") return;
@@ -52,9 +61,41 @@ const SignUp = () => {
     }));
     fileInputRef.current.value = null; // Clear the file input
   };
+  // Function to handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!validate(signUpFormData)) {
+      console.log("Form is invalid");
+      return;
+    }
+
+    try {
+      const userCreditential = signUp(
+        signUpFormData.email,
+        signUpFormData.password
+      );
+      console.log("User created successfully:", userCreditential);
+      navigate("/verify-email");
+      // Reset the form data
+      setSignUpFormData({
+        firstname: "",
+        lastname: "",
+        dateOfBirth: "",
+        profilePicture: null,
+        email: "",
+        password: "",
+        confirmPassword: "",
+        previewUrl: "",
+      });
+      // Reset the file input
+      fileInputRef.current.value = null;
+    } catch (error) {
+      console.log("Error signing user up", error);
+    }
+  };
   return (
     <div className={styles.formWrapper}>
-      <form className={styles.signUpForm}>
+      <form className={styles.signUpForm} onSubmit={handleSubmit} noValidate>
         <h2>Sign-up Form</h2>
         <fieldset className={styles.formGroup}>
           <legend className={styles.formGroupTitle}>
@@ -71,6 +112,7 @@ const SignUp = () => {
             onChange={handleInputChange}
             value={signUpFormData.firstname}
           />
+          {errors && <p className={styles.errorMessage}>{errors.firstname}</p>}
           {/*--------------------------------------------*/}
           <label htmlFor="lastname">Last name</label>
           <input
@@ -83,6 +125,7 @@ const SignUp = () => {
             onChange={handleInputChange}
             value={signUpFormData.lastname}
           />
+          {errors && <p className={styles.errorMessage}>{errors.lastname}</p>}
           {/*--------------------------------------------*/}
           <label htmlFor="dateOfBirth">Date of Birth</label>
           <input
@@ -136,6 +179,7 @@ const SignUp = () => {
             onChange={handleInputChange}
             value={signUpFormData.email}
           />
+          {errors && <p className={styles.errorMessage}>{errors.email}</p>}
           {/*--------------------------------------------*/}
           <label htmlFor="password">Password</label>
           <input
@@ -149,6 +193,7 @@ const SignUp = () => {
             onChange={handleInputChange}
             value={signUpFormData.password}
           />
+          {errors && <p className={styles.errorMessage}>{errors.password}</p>}
           {/*--------------------------------------------*/}
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
@@ -162,6 +207,9 @@ const SignUp = () => {
             onChange={handleInputChange}
             value={signUpFormData.confirmPassword}
           />
+          {errors && (
+            <p className={styles.errorMessage}>{errors.confirmPassword}</p>
+          )}
         </fieldset>
         {/*--------------------------------------------*/}
         <Button className={styles.createAccountButton}>Create account</Button>
