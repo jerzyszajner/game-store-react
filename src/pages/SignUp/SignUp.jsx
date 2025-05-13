@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import { useSignUpValidation } from "../../hooks/useSignUpValidation";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { database } from "../../../firebaseConfig";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 
 const SignUp = () => {
   // Declare state variables and refs
@@ -62,7 +64,7 @@ const SignUp = () => {
     fileInputRef.current.value = null; // Clear the file input
   };
   // Function to handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validate(signUpFormData)) {
       console.log("Form is invalid");
@@ -70,12 +72,26 @@ const SignUp = () => {
     }
 
     try {
-      const userCreditential = signUp(
+      const userCredential = await signUp(
         signUpFormData.email,
         signUpFormData.password
       );
-      console.log("User created successfully:", userCreditential);
+      const user = userCredential.user;
+      console.log("User created successfully:", userCredential);
+
+      // Save user data to Firestore
+      await setDoc(doc(database, "users", user.uid), {
+        uid: user.uid,
+        firstname: signUpFormData.firstname,
+        lastname: signUpFormData.lastname,
+        email: user.email,
+        dateOfBirth: signUpFormData.dateOfBirth || "",
+        profilePicture: null,
+        createdAt: serverTimestamp(),
+      });
       navigate("/verify-email");
+      console.log("User added to the Firestore database");
+
       // Reset the form data
       setSignUpFormData({
         firstname: "",
@@ -88,9 +104,12 @@ const SignUp = () => {
         previewUrl: "",
       });
       // Reset the file input
-      fileInputRef.current.value = null;
+      // Check if the ref exists before resetting
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null;
+      }
     } catch (error) {
-      console.log("Error signing user up", error);
+      console.log(error.message);
     }
   };
   return (
