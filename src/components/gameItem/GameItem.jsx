@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 import styles from "./GameItem.module.css";
 import Button from "../Button/Button";
+import { getCartContext } from "../../context/cartContext";
 
 const GameItem = ({ game }) => {
+  const { dispatch } = getCartContext();
+  const handleAddToCart = () => {
+    dispatch({ type: "ADD_TO_CART", payload: game });
+  };
   return (
     <div className={styles.gameCard}>
       <div className={styles.gameContainer}>
@@ -33,7 +38,9 @@ const GameItem = ({ game }) => {
       <Link to={`/games/${game.id}`} className={styles.gameLink}>
         Details
       </Link>
-      <Button className={styles.addToCartBtn}>Add to cart</Button>
+      <Button className={styles.addToCartBtn} onClick={handleAddToCart}>
+        Add to cart
+      </Button>
     </div>
   );
 };

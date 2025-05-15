@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 const cartContext = createContext();
 
@@ -20,7 +20,7 @@ const cartReducer = (state, action) => {
       if (existingItem) {
         return state.map((item) =>
           item.id === action.payload.id
-            ? [{ ...item, quantity: item.quantity + 1 }]
+            ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       }
@@ -34,14 +34,14 @@ const cartReducer = (state, action) => {
     case "INCREASE_QUANTITY":
       return state.map((item) =>
         item.id === action.payload
-          ? [{ ...item, quantity: item.quantity + 1 }]
+          ? { ...item, quantity: item.quantity + 1 }
           : item
       );
 
     case "DECREASE_QUANTITY":
       return state.map((item) =>
         item.id === action.payload
-          ? [{ ...item, quantity: Math.max(1, item.quantity - 1) }]
+          ? { ...item, quantity: Math.max(1, item.quantity - 1) }
           : item
       );
 
