@@ -28,7 +28,7 @@ const cartReducer = (state, action) => {
     case "REMOVE_FROM_CART":
       return state.filter((item) => item.id !== action.payload);
 
-    case "CLEAR CART":
+    case "CLEAR_CART":
       return [];
 
     case "INCREASE_QUANTITY":
