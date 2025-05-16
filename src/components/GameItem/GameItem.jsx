@@ -5,6 +5,7 @@ import { getCartContext } from "../../context/CartContext";
 
 const GameItem = ({ game }) => {
   const { dispatch } = getCartContext();
+  // Function to handle adding the game to the cart
   const handleAddToCart = () => {
     dispatch({ type: "ADD_TO_CART", payload: game });
   };

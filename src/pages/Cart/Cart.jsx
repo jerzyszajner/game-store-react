@@ -47,7 +47,7 @@ const Cart = () => {
                 <div className={styles.gameDetails}>
                   <h3>{item.title}</h3>
                   <p>Price: ${item.price}</p>
-                  <p>Total: ${item.price * item.quantity.toFixed(2)}</p>
+                  <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
                   <Button
                     onClick={() => handleRemove(item.id)}
                     className={styles.removeButton}

@@ -4,10 +4,16 @@ import styles from "./GameDetails.module.css";
 import { doc, getDoc } from "firebase/firestore";
 import { database } from "../../../firebaseConfig";
 import { useParams } from "react-router-dom";
+import { getCartContext } from "../../context/CartContext";
 
 const GameDetails = () => {
   const { id } = useParams();
   const [game, setGame] = useState({});
+
+  const { dispatch } = getCartContext();
+  const handleAddToCart = () => {
+    dispatch({ type: "ADD_TO_CART", payload: game });
+  };
 
   useEffect(() => {
     const fetchGameDetails = async () => {
@@ -63,7 +69,9 @@ const GameDetails = () => {
             <strong>Overview: </strong>
             {game.overview}
           </p>
-          <Button className={styles.addToCartBtn}>Add to cart</Button>
+          <Button className={styles.addToCartBtn} onClick={handleAddToCart}>
+            Add to cart
+          </Button>
         </div>
         <div className={styles.gameImageContainer}>
           <img
