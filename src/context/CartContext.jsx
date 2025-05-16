@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 
-const cartContext = createContext();
+const CartContext = createContext();
 
 // Generate and retrieve a unique cart token
 const getCartToken = () => {
@@ -69,10 +69,10 @@ export const CartProvider = ({ children }) => {
   }, [cartKey, cart]);
 
   return (
-    <cartContext.Provider value={{ dispatch, cart }}>
+    <CartContext.Provider value={{ dispatch, cart }}>
       {children}
-    </cartContext.Provider>
+    </CartContext.Provider>
   );
 };
 
-export const getCartContext = () => useContext(cartContext);
+export const getCartContext = () => useContext(CartContext);

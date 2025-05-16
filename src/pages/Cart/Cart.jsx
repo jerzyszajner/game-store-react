@@ -1,7 +1,7 @@
 import styles from "./Cart.module.css";
 import { useNavigate, Link } from "react-router-dom";
-import { getAuthContext } from "../../context/authContext";
-import { getCartContext } from "../../context/cartContext";
+import { getAuthContext } from "../../context/AuthContext";
+import { getCartContext } from "../../context/CartContext";
 import { useMemo, useState } from "react";
 import Modal from "../../components/Modal/Modal";
 import Button from "../../components/Button/Button";

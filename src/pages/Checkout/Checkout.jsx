@@ -1,6 +1,6 @@
 import styles from "./Checkout.module.css";
-import { getCartContext } from "../../context/cartContext";
-import { getAuthContext } from "../../context/authContext";
+import { getCartContext } from "../../context/CartContext";
+import { getAuthContext } from "../../context/AuthContext";
 import usePaymentValidation from "../../hooks/usePaymentValidation";
 import { database } from "../../../firebaseConfig";
 import { useMemo, useState } from "react";

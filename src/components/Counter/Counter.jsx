@@ -1,6 +1,6 @@
 import styles from "./Counter.module.css";
 import Button from "../Button/Button";
-import { getCartContext } from "../../context/cartContext";
+import { getCartContext } from "../../context/CartContext";
 
 const Counter = ({ item }) => {
   const { dispatch } = getCartContext(); // Get cart items from context

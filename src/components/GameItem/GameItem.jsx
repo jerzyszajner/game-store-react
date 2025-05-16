@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./GameItem.module.css";
 import Button from "../Button/Button";
-import { getCartContext } from "../../context/cartContext";
+import { getCartContext } from "../../context/CartContext";
 
 const GameItem = ({ game }) => {
   const { dispatch } = getCartContext();
