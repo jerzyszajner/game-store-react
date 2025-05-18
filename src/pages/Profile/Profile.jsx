@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import styles from "./Profile.module.css";
 import { getAuthContext } from "../../context/AuthContext";
-import { doc, getDoc } from "firebase/firestore";
+import {
+  doc,
+  getDoc,
+  collection,
+  query,
+  orderBy,
+  limit,
+  getDocs,
+} from "firebase/firestore";
 import { auth, database } from "../../../firebaseConfig";
 
 const Profile = () => {
@@ -11,21 +19,42 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (!user || !user.uid) return;
-        // Fetch user data from Firestore
+        if (!user?.uid) return;
         const userDocRef = doc(database, "users", user.uid);
         const userDoc = await getDoc(userDocRef);
 
         if (userDoc.exists()) {
           setUserData(userDoc.data());
-        } else {
-          console.log("User not found");
         }
       } catch (error) {
-        console.log(error.message);
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    const fetchLastOrder = async () => {
+      try {
+        if (!user?.uid) return;
+        const ordersQuery = query(
+          collection(database, "users", user.uid, "orders"),
+          orderBy("createdAt", "desc"),
+          limit(1)
+        );
+
+        const querySnapshot = await getDocs(ordersQuery);
+
+        if (!querySnapshot.empty) {
+          const latestOrder = querySnapshot.docs[0].data();
+          setUserData((prev) => ({
+            ...prev,
+            lastPurchase: latestOrder.createdAt.toDate(),
+          }));
+        }
+      } catch (error) {
+        console.error("Error fetching orders:", error);
       }
     };
     fetchUserData();
+    fetchLastOrder();
   }, [user]);
 
   return (
@@ -74,7 +103,9 @@ const Profile = () => {
           </p>
           <p>
             <strong>Last Purchase: </strong>
-            {userData?.lastPurchase || "No purchases yet"}
+            {userData?.lastPurchase
+              ? userData?.lastPurchase?.toLocaleString()
+              : "No purchases yet"}
           </p>
           <p>
             <strong>Email Verification Status: </strong>

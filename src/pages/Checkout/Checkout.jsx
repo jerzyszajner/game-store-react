@@ -63,7 +63,11 @@ const Checkout = () => {
       createdAt: serverTimestamp(),
     };
     try {
-      await addDoc(collection(database, "orders"), orderData);
+      // await addDoc(collection(database, "orders"), orderData);
+      await addDoc(
+        collection(database, "users", user.uid, "orders"),
+        orderData
+      );
       dispatch({ type: "CLEAR_CART" });
       setShowCheckoutModal(true);
       console.log("Order has been registered successfully:", orderData);
