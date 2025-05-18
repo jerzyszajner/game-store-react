@@ -2,6 +2,7 @@ import styles from "./SignUp.module.css";
 import Button from "../../components/Button/Button";
 import { useRef, useState } from "react";
 import { useSignUpValidation } from "../../hooks/useSignUpValidation";
+import { useImageUpload } from "../../hooks/useImageUpload";
 import { useAuth } from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { database } from "../../../firebaseConfig";
@@ -26,6 +27,8 @@ const SignUp = () => {
   const { signUp, signUpErrors, user } = useAuth();
   // Redirect users
   const navigate = useNavigate();
+  // Image upload function from the custom hook
+  const { uploadImage } = useImageUpload();
   // Retrive the input values
   const handleInputChange = (e) => {
     if (e.target.name === "file") return;
@@ -79,6 +82,10 @@ const SignUp = () => {
       const user = userCredential.user;
       console.log("User created successfully:", userCredential);
 
+      const uploadedImage = signUpFormData.profilePicture
+        ? await uploadImage(signUpFormData.profilePicture)
+        : null;
+
       // Save user data to Firestore
       await setDoc(doc(database, "users", user.uid), {
         uid: user.uid,
@@ -86,7 +93,7 @@ const SignUp = () => {
         lastname: signUpFormData.lastname,
         email: user.email,
         dateOfBirth: signUpFormData.dateOfBirth || "",
-        profilePicture: null,
+        profilePicture: uploadedImage,
         createdAt: serverTimestamp(),
       });
       navigate("/verify-email");

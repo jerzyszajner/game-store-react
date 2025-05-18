@@ -25,6 +25,7 @@ Game Store is a school project e-commerce application for video game sales, offe
 - React 19
 - Vite 6
 - Firebase Authentication and Firestore
+- Cloudinary for profile images storage
 - React Router
 - CSS Modules
 - FontAwesome

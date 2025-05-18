@@ -46,4 +46,8 @@
 
 .profileImage {
   width: 50%;
+  border-radius: 50%;
+  user-drag: none;
+  -webkit-user-drag: none;
+  -moz-user-drag: none;
 }
