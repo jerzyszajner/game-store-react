@@ -50,3 +50,16 @@
   background-color: var(--secondary-color);
   color: var(--text-light);
 }
+
+@media screen and (max-width: 768px) {
+  .heroTitle {
+    font-size: var(--large-font-size);
+  }
+
+  .ctaButton {
+    padding: var(--space-small) var(--space-medium);
+    width: 90%;
+    margin: 0 auto;
+  }
+
+}

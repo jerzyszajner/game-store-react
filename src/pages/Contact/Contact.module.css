@@ -11,50 +11,61 @@
   background-repeat: no-repeat;
   padding: var(--space-x-large);
 }
+
 .contactFormContainer {
-  width: 50%;
+  width: 40%;
   height: 75%;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: var(--space-medium);
   padding: var(--space-medium) var(--space-large);
   border-radius: var(--border-radius-medium);
-  background-color: rgba(255, 255, 255, 0.1); /* 🔹 Makes it semi-transparent */
+  background-color: rgba(255, 255, 255, 0.1);
+  /* 🔹 Makes it semi-transparent */
   backdrop-filter: blur(4px);
   color: var(--text-light);
 }
+
 .formTitle {
   font-weight: bold;
   font-size: var(--medium-font-size);
 }
+
 .nameSection,
 .contactSection {
   display: flex;
   gap: var(--space-medium);
 }
+
 .nameSection div,
 .contactSection div {
   flex-basis: 50%;
 }
+
 .inputGroup {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.25rem;
 }
+
 .inputGroup p {
   color: crimson;
 }
+
 .inputElement {
   width: 100%;
   height: 2rem;
   padding: 0 0.25rem;
 }
+
 .textareaElement {
   width: 100%;
   padding: 0.5rem;
   resize: none;
 }
+
 .submitButton {
   height: 48px;
   background-color: var(--primary-color);
@@ -64,9 +75,11 @@
   transition: all 0.3s ease-in-out;
   font-size: var(--base-font-size);
 }
+
 .submitButton:hover {
   background-color: var(--secondary-color);
 }
+
 /* END OF PART 1 */
 .messageErrorAndCount {
   display: block;
@@ -89,11 +102,47 @@
   font-size: var(--base-font-size);
   margin: 0 auto;
 }
+
 .closeModalButton:hover {
   background-color: var(--primary-color);
 }
+
 .contactModalContent {
   display: flex;
   flex-direction: column;
   gap: var(--space-medium);
+}
+
+@media screen and (max-width: 1200px) {
+  .contactFormContainer {
+    width: 80%;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .contactForm {
+    padding: var(--space-medium);
+  }
+
+  .contactFormContainer {
+    width: 95%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contactForm {
+    padding: var(--space-small);
+  }
+
+  .contactFormContainer {
+    width: 100%;
+  }
+
+  .nameSection,
+  .contactSection {
+    flex-direction: column;
+    gap: var(--space-small);
+  }
+
 }

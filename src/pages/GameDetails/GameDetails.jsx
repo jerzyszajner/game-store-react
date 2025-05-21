@@ -39,6 +39,13 @@ const GameDetails = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.gameDetailsContainer}>
+        <div className={styles.gameImageContainer}>
+          <img
+            src={game.imageUrl}
+            alt={game.title}
+            className={styles.gameImage}
+          />
+        </div>
         <div className={styles.gameDescriptionContainer}>
           <h2>{game.title}</h2>
           <p>
@@ -72,13 +79,6 @@ const GameDetails = () => {
           <Button className={styles.addToCartBtn} onClick={handleAddToCart}>
             Add to cart
           </Button>
-        </div>
-        <div className={styles.gameImageContainer}>
-          <img
-            src={game.imageUrl}
-            alt={game.title}
-            className={styles.gameImage}
-          />
         </div>
       </div>
     </div>

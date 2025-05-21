@@ -58,3 +58,11 @@
   font-size: var(--base-font-size);
   margin-top: var(--space-small);
 }
+
+@media screen and (max-width: 768px) {
+  .verificationContainer {
+    width: 92%;
+    padding: var(--space-medium);
+    gap: var(--space-small);
+  }
+}
