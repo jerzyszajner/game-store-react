@@ -1,0 +1,47 @@
+.notFoundContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    height: 100vh;
+    background-color: var(--background-color);
+    padding: var(--space-large);
+}
+
+.notFound {
+    font-size: var(--x-large-font-size);
+    font-weight: bold;
+    color: var(--text-error);
+}
+
+.message {
+    font-size: var(--large-font-size);
+    color: var(--primary-color);
+    display: block;
+}
+
+.suggestion {
+    font-size: var(--medium-font-size);
+    color: var(--primary-color);
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .notFoundContainer {
+        padding: var(--space-medium);
+    }
+
+    .notFound {
+        font-size: var(--large-font-size);
+    }
+
+    .message {
+        font-size: var(--medium-font-size);
+    }
+
+    .suggestion {
+        font-size: var(--small-font-size);
+    }
+
+}

@@ -4,24 +4,35 @@
   box-sizing: border-box;
   font-family: Exo2-VariableFont;
 }
+
 button {
   cursor: pointer;
 }
+
+input {
+  font-size: var(--base-font-size);
+}
+
 @font-face {
   font-family: Exo2-VariableFont;
   src: url("/fonts/Exo2-VariableFont.ttf");
 }
+
 :root {
-  --primary-color: #3c0d60; /* Deep eggplant purple */
-  --secondary-color: #642f6c; /* Rich, muted violet */
+  --primary-color: #3c0d60;
+  /* Deep eggplant purple */
+  --secondary-color: #642f6c;
+  /* Rich, muted violet */
   --primary-color-light: #fff;
   --secondary-color-light: lavender;
   --card-color: #a7bcd6;
-  --text-light: #ffffff; /* Keeping text bright for contrast */
+  --text-light: #ffffff;
+  /* Keeping text bright for contrast */
   --text-error: crimson;
 
   /* Fonts */
   --base-font-size: 1rem;
+  --small-font-size: 0.875rem;
   --medium-font-size: 1.5rem;
   --large-font-size: 2rem;
   --x-large-font-size: 3rem;

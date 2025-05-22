@@ -2,6 +2,7 @@
   width: 100%;
   min-height: 100vh;
 }
+
 .checkoutContainer {
   width: 100%;
   min-height: 100vh;
@@ -10,10 +11,12 @@
     url("/images/hero-section2.jpg");
   padding: var(--space-x-large);
 }
+
 .purchaseOverviewContainer,
 .paymentContainer {
   flex: 1;
 }
+
 .purchaseOverviewContainer .cartListContainer {
   width: 80%;
   max-width: 800px;
@@ -60,6 +63,7 @@
   display: flex;
   justify-content: center;
 }
+
 .removeButton {
   max-width: 100px;
   background-color: var(--text-error);
@@ -76,11 +80,13 @@
   opacity: 0.9;
   transform: scale(1.05);
 }
+
 .totalAmount {
   padding: var(--space-medium);
   font-size: var(--medium-font-size);
   font-weight: bold;
 }
+
 .toCheckoutLink {
   display: flex;
   justify-content: center;
@@ -97,9 +103,11 @@
   font-size: var(--base-font-size);
   margin: 0 auto;
 }
+
 .toCheckoutLink:hover {
   background-color: var(--primary-color);
 }
+
 /* Payment styles */
 .paymentContainer {
   width: 80%;
@@ -135,9 +143,11 @@
 
   color: var(--primary-color);
 }
+
 .paymentSelect {
   height: 32px;
 }
+
 .cardDetails {
   display: flex;
   align-items: center;
@@ -168,6 +178,7 @@
 .payButton:hover {
   background-color: var(--primary-color);
 }
+
 .expiryContainer,
 .cvvContainer {
   display: flex;
@@ -179,14 +190,17 @@
 .expiryContainer input {
   max-width: 60px;
 }
+
 .errorMessage {
   color: var(--text-error);
 }
+
 .checkoutModalContent {
   display: flex;
   flex-direction: column;
   gap: var(--space-medium);
 }
+
 .closeCheckoutModal {
   width: 100%;
   display: flex;
@@ -201,6 +215,70 @@
   transition: all 0.3s ease-in-out;
   font-size: var(--base-font-size);
 }
+
 .closeCheckoutModal:hover {
   background-color: var(--primary-color);
+}
+
+@media screen and (max-width: 1200px) {
+  .checkoutContainer {
+    padding: var(--space-medium);
+  }
+
+  .purchaseOverviewContainer .cartListContainer {
+    width: 100%;
+    padding: var(--space-small);
+  }
+
+  .purchaseOverviewContainer,
+  .paymentContainer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+}
+
+@media screen and (max-width: 868px) {
+  .checkoutContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .purchaseOverviewContainer .cartListContainer {
+    width: 100%;
+
+  }
+
+  .purchaseOverviewContainer,
+  .paymentContainer {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .checkoutContainer {
+    padding: var(--space-small);
+  }
+
+  .purchaseOverviewContainer .cartListContainer {
+    width: 100%;
+    padding: var(--space-small);
+  }
+
+  .purchaseOverviewContainer,
+  .paymentContainer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cartItem {
+    display: flex;
+    align-items: center;
+    gap: var(--space-small);
+    padding: var(--space-small);
+    border-bottom: 2px solid var(--secondary-color);
+  }
+
+
 }

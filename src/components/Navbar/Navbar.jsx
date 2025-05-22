@@ -9,12 +9,13 @@ import Button from "../Button/Button";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 const Navbar = () => {
   const { cart } = getCartContext();
   const { user } = getAuthContext();
   const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Number of items in the cart
   const CartItemsCount = useMemo(() => {
@@ -30,6 +31,16 @@ const Navbar = () => {
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  // Toggle menu visibility
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  // Close menu
+  const closeMenu = () => {
+    setIsMenuOpen(false);
   };
 
   return (
@@ -70,7 +81,7 @@ const Navbar = () => {
             )}
           </Link>
 
-          <Button className={styles.hamburgerButton}>
+          <Button className={styles.hamburgerButton} onClick={toggleMenu}>
             <FontAwesomeIcon
               icon={faBars}
               className={styles.hamburgerMenuIcon}
@@ -79,10 +90,18 @@ const Navbar = () => {
         </div>
       </div>
       {/* ----------------------------------------- */}
-      <div className={styles.secondRow}>
+      {isMenuOpen && (
+        <div className={styles.menuOverlay} onClick={closeMenu}></div>
+      )}
+      <div
+        className={`${styles.secondRow} ${
+          isMenuOpen ? styles.displayNavbarLinks : ""
+        }`}
+      >
         <NavLink
           to="/"
           className={({ isActive }) => (isActive ? styles.activeLink : "")}
+          onClick={closeMenu}
         >
           Home
         </NavLink>
@@ -90,6 +109,7 @@ const Navbar = () => {
         <NavLink
           to="/games"
           className={({ isActive }) => (isActive ? styles.activeLink : "")}
+          onClick={closeMenu}
         >
           Games
         </NavLink>
@@ -97,6 +117,7 @@ const Navbar = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) => (isActive ? styles.activeLink : "")}
+          onClick={closeMenu}
         >
           Contact
         </NavLink>

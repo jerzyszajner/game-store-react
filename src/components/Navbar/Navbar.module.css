@@ -6,31 +6,37 @@
   flex-direction: column;
   /* gap: var(--space-medium); */
 }
+
 .firstRow {
   display: flex;
   justify-content: space-between;
 }
+
 .logo img {
   width: 48px;
   height: auto;
 }
+
 .cartHamburgerMenu {
   display: flex;
   align-items: center;
-  gap: var(--space-medium);
+  gap: var(--space-large);
 }
+
 .cartButton,
 .profileButton,
 .hamburgerButton {
   background-color: transparent;
   border: none;
 }
+
 .profileIcon,
 .cartIcon,
 .hamburgerMenuIcon {
   font-size: var(--medium-font-size);
   color: var(--primary-color-light);
 }
+
 .signInLink,
 .signOutButton {
   border: 1px solid var(--primary-color-light);
@@ -39,23 +45,28 @@
   padding: var(--space-small);
   border-radius: var(--border-radius-small);
 }
+
 .signInLink:hover,
 .signOutButton:hover {
   opacity: 0.8;
 }
+
 .secondRow {
   display: flex;
   justify-content: center;
   gap: var(--space-large);
 }
+
 .secondRow a {
   font-size: var(--medium-font-size);
   text-decoration: none;
   color: var(--text-light);
 }
+
 .hamburgerButton {
   display: none;
 }
+
 .activeLink {
   border-bottom: 2px solid var(--primary-color-light);
   transition: all 0.2s;
@@ -65,13 +76,15 @@
 .cartButton {
   position: relative;
 }
+
 .cartBadge {
   width: 16px;
   height: 16px;
   position: absolute;
   top: -10px;
   right: -8px;
-  background-color: orangered; /* Use a standout color */
+  background-color: orangered;
+  /* Use a standout color */
   font-size: var(--small-font-size);
   font-weight: bold;
   border-radius: 50%;
@@ -84,26 +97,52 @@
 
 /* ------------------------- */
 @media screen and (max-width: 680px) {
+  .navbar {
+    padding: var(--space-medium) var(--space-large);
+  }
+
   .hamburgerButton {
     display: block;
+    z-index: 99999;
   }
-  .linksContainer {
-    position: absolute;
+
+  .hamburgerMenuIcon {
+    font-size: var(--large-font-size);
+  }
+
+  .secondRow {
+    position: fixed;
     top: 0;
-    left: -1000px;
-    width: 50%;
-    height: 100%;
+    left: -100%;
+    width: 70%;
+    height: 100vh;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: var(--primary-color);
-
-    transition: left 1s;
+    z-index: 1000;
+    transition: left 0.4s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    padding: var(--space-x-large) 0;
+    gap: var(--space-x-large);
   }
+
   .displayNavbarLinks {
     left: 0;
   }
-  .linksContainer a {
+
+  .secondRow a {
     font-size: var(--medium-font-size);
+    padding: var(--space-small) var(--space-medium);
+  }
+
+  .menuOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
   }
 }

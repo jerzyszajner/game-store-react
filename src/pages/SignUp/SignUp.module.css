@@ -113,7 +113,8 @@
   }
 
   .signUpForm {
-    width: 90%;
+    width: 100%;
+    padding: var(--space-medium);
   }
 
   .formInput {
@@ -123,6 +124,13 @@
   .createAccountButton {
     height: 50px;
     font-size: var(--base-font-size-large);
+  }
+
+}
+
+@media screen and (max-width: 480px) {
+  .signUpForm {
+    padding: var(--space-small);
   }
 
 }
